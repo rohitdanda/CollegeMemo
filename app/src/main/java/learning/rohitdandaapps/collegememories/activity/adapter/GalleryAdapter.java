@@ -58,7 +58,7 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.MyViewHo
                 .thumbnail(0.5f)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .placeholder(R.drawable.lg)
+                .placeholder(R.drawable.aj)
                 .into(holder.thumbnail);
     }
 

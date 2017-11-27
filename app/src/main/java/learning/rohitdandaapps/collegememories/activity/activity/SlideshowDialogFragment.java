@@ -2,6 +2,7 @@ package learning.rohitdandaapps.collegememories.activity.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -14,11 +15,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.github.chrisbanes.photoview.PhotoView;
 
 import java.util.ArrayList;
 
 import learning.rohitdandaapps.collegememories.R;
 import learning.rohitdandaapps.collegememories.activity.ImagesModel.Image;
+
 
 /**
  * Created by rohitdanda on 26/11/2017.
@@ -98,6 +101,7 @@ public class SlideshowDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+
     }
 
     //	adapter
@@ -114,21 +118,25 @@ public class SlideshowDialogFragment extends DialogFragment {
             layoutInflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View view = layoutInflater.inflate(R.layout.image_fullscreen_preview, container, false);
 
-            ImageView imageViewPreview = (ImageView) view.findViewById(R.id.image_preview);
 
+            PhotoView photoView = (PhotoView)view.findViewById(R.id.image_preview);
+
+            //photoView.setImageResource(R.drawable.image);
 
 
             Image image = images.get(position);
 
-            Glide.with(getActivity()).load(image.getLarge())
+
+
+            Glide.with(getActivity()).
+                    load(image.getLarge())
                     .thumbnail(0.5f)
                     .crossFade()
+                    .fitCenter()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imageViewPreview);
+                    .into(photoView);
 
             container.addView(view);
-
-
 
             return view;
         }

@@ -2,6 +2,7 @@ package learning.rohitdandaapps.collegememories.activity.activity;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -30,7 +32,7 @@ import learning.rohitdandaapps.collegememories.activity.adapter.GalleryAdapter;
 public class MainActivity extends AppCompatActivity {
 
     private String TAG = MainActivity.class.getSimpleName();
-    private static final String endpoint = "https://raw.githubusercontent.com/rohitdanda/MemoriesApp/master/MemoriesApp.json";
+    private static final String endpoint = "https://raw.githubusercontent.com/rohitdanda/CollegeMemo/master/photos.json";
     private ArrayList<Image> images;
     private ProgressDialog pDialog;
     private GalleryAdapter mAdapter;
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
 
         setContentView(R.layout.activity_main);
+        MultiDex.install(this);
 
 
         //  ActionBar actionBar = getSupportActionBar();
@@ -79,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 newFragment.setArguments(bundle);
                 newFragment.show(ft, "slideshow");
 
+
             }
 
             @Override
@@ -109,13 +113,13 @@ public class MainActivity extends AppCompatActivity {
                             try {
                                 JSONObject object = response.getJSONObject(i);
                                 Image image = new Image();
-                                image.setName(object.getString("name"));
+                                //image.setName(object.getString("name"));
 
                                 JSONObject url = object.getJSONObject("url");
                                 image.setSmall(url.getString("small"));
                                 image.setMedium(url.getString("medium"));
                                 image.setLarge(url.getString("large"));
-                                image.setTimestamp(object.getString("timestamp"));
+                                //image.setTimestamp(object.getString("timestamp"));
 
                                 images.add(image);
 
