@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
         images = new ArrayList<>();
         mAdapter = new GalleryAdapter(getApplicationContext(), images);
 
-        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
@@ -101,12 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
-        for(int i=0;i<valuefromdatabase.size();i++){
-            Log.d("Value above",valuefromdatabase.get(i).toString());
-        }
-
-
-        mAdapter.notifyDataSetChanged();
 
 
         myRef.addChildEventListener(new ChildEventListener() {
