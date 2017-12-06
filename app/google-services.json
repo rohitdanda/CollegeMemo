@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "864870847248",
+    "firebase_url": "https://collegememo-e5f96.firebaseio.com",
+    "project_id": "collegememo-e5f96",
+    "storage_bucket": "collegememo-e5f96.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864870847248:android:87ceab88c98014a2",
+        "android_client_info": {
+          "package_name": "learning.rohitdandaapps.collegememories"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864870847248-3ostljf29rva4cebmhkvpkqa81erg6tr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "learning.rohitdandaapps.collegememories",
+            "certificate_hash": "43f8dc9bc5c18be5a0fa7adc5ec79eb672e65468"
+          }
+        },
+        {
+          "client_id": "864870847248-hqb88tb0cejtg9d020rvrmhsor3ktj32.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKFa4zo2z-SiEgMwjJcYP-8NVCEaJJ_BY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864870847248-hqb88tb0cejtg9d020rvrmhsor3ktj32.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

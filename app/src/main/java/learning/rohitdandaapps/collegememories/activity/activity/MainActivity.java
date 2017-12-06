@@ -17,6 +17,12 @@ import android.widget.ImageView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     private String TAG = MainActivity.class.getSimpleName();
     private static final String endpoint = "https://raw.githubusercontent.com/rohitdanda/CollegeMemo/master/photos.json";
     private ArrayList<Image> images;
+    private ArrayList<String> valuefromdatabase = new ArrayList<>();
     private ProgressDialog pDialog;
     private GalleryAdapter mAdapter;
     private RecyclerView recyclerView;
@@ -45,15 +52,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,WindowManager.LayoutParams.FLAG_SECURE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
 
         setContentView(R.layout.activity_main);
         MultiDex.install(this);
 
 
         //  ActionBar actionBar = getSupportActionBar();
-
-
 
 
         //  Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,13 +94,65 @@ public class MainActivity extends AppCompatActivity {
             public void onLongClick(View view, int position) {
 
 
-
             }
         }));
 
-        fetchImages();
-    }
+        //fetchImages();
 
+        final DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+        for(int i=0;i<valuefromdatabase.size();i++){
+            Log.d("Value above",valuefromdatabase.get(i).toString());
+        }
+
+
+        mAdapter.notifyDataSetChanged();
+
+
+        myRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                String value = dataSnapshot.getValue(String.class);
+                Image image = new Image();
+                valuefromdatabase.add(value);
+
+
+                image.setSmall(value);
+                image.setMedium(value);
+                image.setLarge(value);
+                images.add(image);
+
+                mAdapter.notifyDataSetChanged();
+
+
+            }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
+        mAdapter.notifyDataSetChanged();
+
+
+    }
     private void fetchImages() {
 
         pDialog.setMessage("Downloading Images...");
